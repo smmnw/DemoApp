@@ -4,6 +4,7 @@ import {Button, Card, TextInput, useTheme} from 'react-native-paper';
 import {router, useLocalSearchParams} from "expo-router";
 import {useDeleteMealById, useReadMealById, useUpdateMeal} from "@/hooks/useFood";
 import * as ImagePicker from "expo-image-picker";
+import {getImageSourceFromString} from "@/utils";
 
 // Utility: Check if input is  valid number
 const isNumber = (value: any) => {
@@ -181,7 +182,7 @@ const MealInputForm = () => {
                                 <Text style={styles.previewLabel}>Image Preview:</Text>
                                 <View style={styles.imageContainer}>
                                     <Image
-                                        source={form.img}
+                                        source={getImageSourceFromString(form.img)}
                                         style={styles.image}
                                         resizeMode="cover"
                                         onError={() => console.warn('Invalid image URL')}

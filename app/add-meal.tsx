@@ -4,6 +4,7 @@ import {Button, Card, TextInput, useTheme} from 'react-native-paper';
 import {useAddMeal} from '@/hooks/useFood'
 import * as ImagePicker from 'expo-image-picker'
 import {router} from "expo-router";
+import {getImageSourceFromString} from "@/utils";
 
 // Utility: Check if input is  valid number
 const isNumber = (value: any) => {
@@ -164,11 +165,7 @@ const MealInputForm = () => {
                                     onError={(error) => console.log('Image loading failed on iOS:', error.nativeEvent.error)}
 
                                     source={
-                                        typeof form.img === 'string'
-                                            ? form.img.trim() !== ''
-                                                ? {uri: form.img}
-                                                : placeholderImage
-                                            : form.img || placeholderImage // form.img from require(), fallback to placeholder
+                                        typeof form.img === 'string' ? form.img.trim() !== '' ? getImageSourceFromString(form.img) : placeholderImage : form.img || placeholderImage // form.img from require(), fallback to placeholder
                                     }
                                     style={styles.image}
                                     resizeMode="cover"

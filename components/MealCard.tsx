@@ -3,11 +3,12 @@ import { View, Image, StyleSheet } from 'react-native';
 import { Card, Title, Paragraph, Text, useTheme } from 'react-native-paper';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {Meal} from "@/types";
+import {getImageSourceFromString} from "@/utils";
 
 const NutritionCard = ({ item ,onClick}:{item:Meal,onClick:any}) => {
 
     const theme = useTheme();
-    console.log(item)
+    const imgSource =getImageSourceFromString(item.img)
     return (
         <Card style={styles.card} onPress={()=>{
             onClick(item.id)
@@ -15,7 +16,7 @@ const NutritionCard = ({ item ,onClick}:{item:Meal,onClick:any}) => {
 
             <Card.Cover
                 //@ts-ignore
-                source={item.img} />
+                source={imgSource} />
             <Card.Content>
                 <Title style={styles.title}>{item.name}</Title>
                 <Paragraph>Weight: {item.weight_g}g</Paragraph>
